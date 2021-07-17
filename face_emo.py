@@ -4,12 +4,13 @@ from fer import FER
 detector = FER() 
 
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(3,640)
 cap.set(4,480)
 
 while True:
     ret, image = cap.read()
+    image = cv2.rotate(image, cv2.ROTATE_180)
 
 
     try:
