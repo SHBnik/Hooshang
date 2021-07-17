@@ -1,140 +1,85 @@
-
-import os
-
-
-if os.name == 'nt':
-    import msvcrt
-    def getch():
-        return msvcrt.getch().decode()
-else:
-    import sys, tty, termios
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    def getch():
-        try:
-            tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
-
-from dynamixel_sdk import *                    # Uses Dynamixel SDK library
-
-# Control table address
-ADDR_MX_TORQUE_ENABLE      = 24               # Control table address is different in Dynamixel model
-ADDR_MX_MOVE_SPEED         = 32
-ADDR_MX_CW_ANGLE_LIMIT     = 6
-ADDR_MX_CCW_ANGLE_LIMIT    = 8 
-
-# Data Byte Length
-LEN_MX_MOVE_SPEED          = 2
-
-# Protocol version
-PROTOCOL_VERSION            = 1.0               # See which protocol version is used in the Dynamixel
-
-# Default setting
-DXL1_ID                     = 18                 # Dynamixel#1 ID : 1
-DXL2_ID                     = 14                 # Dynamixel#1 ID : 2
-BAUDRATE                    = 1000000             # Dynamixel default baudrate : 57600
-DEVICENAME                  = 'COM5'    # Check which port is being used on your controller
-                                                # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
-
-TORQUE_ENABLE               = 1                 # Value for enabling the torque
-TORQUE_DISABLE              = 0                 # Value for disabling the torque
-DXL_MINIMUM_POSITION_VALUE  = 100           # Dynamixel will rotate between this value
-DXL_MAXIMUM_POSITION_VALUE  = 1023            # and this value (note that the Dynamixel would not move when the position value is out of movable range. Check e-manual about the range of the Dynamixel you use.)
-DXL_MOVING_STATUS_THRESHOLD = 20                # Dynamixel moving status threshold
+import dyna
+import pygame
+import time
+ 
 
 
-
-index = 0
-dxl_goal_position = [DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE]         # Goal position
-
-
-# Initialize PortHandler instance
-# Set the port path
-# Get methods and members of PortHandlerLinux or PortHandlerWindows
-portHandler = PortHandler(DEVICENAME)
-
-# Initialize PacketHandler instance
-# Set the protocol version
-# Get methods and members of Protocol1PacketHandler or Protocol2PacketHandler
-packetHandler = PacketHandler(PROTOCOL_VERSION)
-
-# Initialize GroupSyncWrite instance
-groupSyncWrite = GroupSyncWrite(portHandler, packetHandler, ADDR_MX_MOVE_SPEED, LEN_MX_MOVE_SPEED)
-
-# Open port
-if portHandler.openPort():
-    print("Succeeded to open the port")
-else:
-    print("Failed to open the port")
-    print("Press any key to terminate...")
-    getch()
-    quit()
+pygame.init()
+pygame.font.init() 
+              
+width, height = 64*10, 64*8
+screen=pygame.display.set_mode((width, height))
+screen.fill((255,255,255))
 
 
-# Set port baudrate
-if portHandler.setBaudRate(BAUDRATE):
-    print("Succeeded to change the baudrate")
-else:
-    print("Failed to change the baudrate")
-    print("Press any key to terminate...")
-    getch()
-    quit()
+mot = dyna.motors()
 
-# Wheel mode
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_CW_ANGLE_LIMIT, 0)
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL1_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
-# Enable Dynamixel#1 Torque
-dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
-
-# Wheel mode
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_CW_ANGLE_LIMIT, 0)
-dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, DXL2_ID, ADDR_MX_CCW_ANGLE_LIMIT, 0)
-# # Enable Dynamixel#2 Torque
-dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_ENABLE)
-
-
+speed = 250
+pos_up = 530
+pos_right = 500
+right_hand = 200
+left_hand = 874
+foot_move = False 
 while 1:
-    print("Press any key to continue! (or press ESC to quit!)")
-    if getch() == chr(0x1b):
-        break
 
-    # Allocate goal position value into byte array
-    param_goal_position = [DXL_LOBYTE(1600), DXL_HIBYTE(1600)]
-    print(param_goal_position)
+    for event in pygame.event.get():
+        # check if the event is the X button 
+        if event.type == pygame.QUIT:
+            # if it is quit the game
+            pygame.quit() 
+            exit(0) 
+        if event.type == pygame.KEYDOWN:
+            if event.key==pygame.K_UP:
+                mot.move(speed,90,0)
+                foot_move = True
+            elif event.key==pygame.K_LEFT:
+                mot.move(speed,0,0)
+                foot_move = True
+            elif event.key==pygame.K_DOWN:
+                mot.move(speed,270,0)
+                foot_move = True
+            elif event.key==pygame.K_RIGHT:
+                mot.move(speed,180,0)  
+                foot_move = True          
+            elif event.key==pygame.K_KP8:
+                pos_up = mot.constrain(pos_up + 5,445,600)
+                mot.head(pos_up,0)
+                foot_move = False
+            elif event.key==pygame.K_KP2:
+                pos_up = mot.constrain(pos_up - 5,445,600)
+                mot.head(pos_up,0)
+                # mot.head2(-300) 
+                foot_move = False          
+            elif event.key==pygame.K_KP7:
+                pos_right = mot.constrain(pos_right + 5,220,780)
+                mot.head(pos_right,1)
+                foot_move = False
+            elif event.key==pygame.K_KP9:
+                pos_right = mot.constrain(pos_right - 5,220,780)
+                mot.head(pos_right,1)
+                foot_move = False
+            elif event.key==pygame.K_KP6:
+                mot.move(0,0,speed-50)
+                foot_move = True
+            elif event.key==pygame.K_KP4:
+                mot.move(0,0,-speed+50)
+                foot_move = True
+            elif event.key==pygame.K_F1:
+                right_hand = mot.constrain(right_hand + 200,10,1020)
+                mot.hand(right_hand,0)
+            elif event.key==pygame.K_F2:
+                right_hand = mot.constrain(right_hand - 200,10,1020)
+                mot.hand(right_hand,0)
+            elif event.key==pygame.K_F5:
+                left_hand = mot.constrain(left_hand - 200,10,1020)
+                mot.hand(left_hand,1)
+            elif event.key==pygame.K_F6:
+                left_hand = mot.constrain(left_hand + 200,10,1020)
+                mot.hand(left_hand,1)
+ 
+        if event.type == pygame.KEYUP:
+            
+            mot.stop_motors()
 
-    # Add Dynamixel#1 goal position value to the Syncwrite parameter storage
-    dxl_addparam_result = groupSyncWrite.addParam(DXL1_ID, param_goal_position)
 
 
-    # Add Dynamixel#2 goal position value to the Syncwrite parameter storage
-    dxl_addparam_result = groupSyncWrite.addParam(DXL2_ID, param_goal_position)
-
-
-    # Syncwrite goal position
-    dxl_comm_result = groupSyncWrite.txPacket()
-
-
-    # Clear syncwrite parameter storage
-    groupSyncWrite.clearParam()
-
-
-
-# Disable Dynamixel#1 Torque
-dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL1_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
-if dxl_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-elif dxl_error != 0:
-    print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-# Disable Dynamixel#2 Torque
-dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL2_ID, ADDR_MX_TORQUE_ENABLE, TORQUE_DISABLE)
-if dxl_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-elif dxl_error != 0:
-    print("%s" % packetHandler.getRxPacketError(dxl_error))
-
-# Close port
-portHandler.closePort()
