@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Hooshang</title>
+	<style>
+		.grid-container {
+		  display: grid;
+		  justify-content: space-evenly;
+		  grid-template-columns: auto 75px auto; 
+		  grid-gap: 10px;
+		  background-color: #312F2F;
+		  padding: 8px;
+		  padding-bottom: 18px;
+		}
+
+		.grid-container > button {
+		  background-color: rgba(255, 255, 255, 0.8);
+		  text-align: center;
+		  padding: 0px 0;
+		  font-size: 50px;
+		  border-radius: 100%;
+		}
+		
+		
+		.grid-container1 {
+		  display: grid;
+		  justify-content: center;
+		  grid-template-columns: auto auto  ; 
+		  grid-gap: 30px;
+		  background-color: #312F2F;
+		  padding: 8px;
+		  padding-bottom: 18px;
+		}
+
+		.grid-container1 > button {
+		  background-color: rgba(255, 255, 255, 0.8);
+		  text-align: center;
+		  padding: 5px 0;
+		  font-size: 25px;
+		  border-radius: 30%
+		}
+		
+		.grid-container2 {
+		  display: grid;
+		  justify-content: space-evenly;
+		  grid-template-columns: auto 50px auto; 
+		  grid-gap: 10px;
+		  background-color: #312F2F;
+		  padding: 8px;
+		  padding-bottom: 18px;
+		}
+
+		.grid-container2 > button {
+		  background-color: rgba(255, 255, 255, 0.8);
+		  text-align: center;
+		  padding: 5px 0;
+		  font-size: 25px;
+		  border-radius: 30%
+		}
+		
+		.grid-container3 {
+		  display: grid;
+		  justify-content: center;
+		  grid-template-columns: auto; 
+		  grid-gap: 10px;
+		  background-color: #312F2F;
+		  padding: 8px;
+		  padding-bottom:0;
+		}
+
+		.grid-container3 > button {
+		  background-color: rgba(255, 255, 255, 0.8);
+		  text-align: center;
+		  padding: 5px 0;
+		  font-size: 43px;
+		  border-radius: 30%
+		}
+		
+		.grid-container4 {
+		  display: grid;
+		  justify-content: center;
+		  grid-template-columns: auto auto auto; 
+		  grid-gap: 10px;
+		  background-color: #312F2F;
+		  padding: 8px;
+		}
+
+		.grid-container4 > button {
+		  background-color: rgba(255, 255, 255, 0.8);
+		  text-align: center;
+		  padding: 5px 0;
+		  font-size: 43px;
+		  border-radius: 30%
+		}
+
+</style>
+  </head>
+  <body style="background-color: #312F2F;">
+    <header></header>
+    <main>
+		<div class="grid-container">
+		  <!--Normal-->
+		  <button onclick="normal()">&#128578 </button>
+		  <!--Laugh-->
+		  <button onclick="laugh()">&#128514 </button>
+		  <!--Upset-->
+		  <button onclick="upset()">&#128542 </button> 
+		  <!--Surprise-->		  
+		  <button onclick="surprise()">&#128558 </button>
+		  <!--Auto Face-->		  
+		  <button onclick="autoFace()" style="font-size: 25px; border-radius: 10%">Auto Face</button>
+		  <!--Shy-->
+		  <button onclick="shy()">&#128538 </button>
+		</div>
+		
+		<div class="grid-container1">
+		  <!--Neck Top-->
+		  <button id="btn-neckTop" onclick="neckTop()">Neck Top</button>
+		  <!--Neck Bottom-->
+		  <button id="btn-neckBottom" onclick="neckBottom()">Neck Bottom</button>
+		  <!--Neck Left-->
+		  <button id="btn-neckLeft" onclick="neckLeft()">Neck Left</button> 
+		  <!--Neck Right-->	  
+		  <button id="btn-neckRight" onclick="neckRight()">Neck Right</button>
+		</div>
+		
+		<div class="grid-container2">
+		  <!--Arm Left Top-->
+		  <button id="btn-armLeftTop" onclick="armLeftTop()">&#128170; &#128070</button>
+		  <!--Round Right-->
+		  <button id="btn-roundRight" onclick="roundRight()" style="font-size: 31px; border-radius: 100%">&#8634</button>
+		  <!--Arm Right Top-->
+		  <button id="btn-armRightTop" onclick="armRightTop()">&#128170; &#128070</button> 
+		  <!--Arm Left Bottom-->
+		  <button id="btn-armLeftBottom" onclick="armLeftBottom()">&#128170; &#128071</button>
+		  <!--Round Left-->
+		  <button id="btn-roundLeft" onclick="roundLeft()" style="font-size: 31px; border-radius: 100%">&#8635</button>
+		  <!--Arm Right Bottom--> 
+		  <button id="btn-armRightBottom" onclick="armRightBottom()">&#128170; &#128071</button>
+		</div>
+		
+		<div class="grid-container3">
+		  <!--Move Front-->
+		  <button id="btn-moveFront" onclick="moveFront()">&#11014;&#65039;</button>
+		</div>
+		
+		<div class="grid-container4">
+		  <!--Move Left-->
+		  <button id="btn-moveLeft" onclick="moveLeft()">&#11013;&#65039;</button>
+		  <!--Move Back-->
+		  <button id="btn-moveBack" onclick="moveBack()">&#11015;&#65039;</button>
+		  <!--Move Right-->
+		  <button id="btn-moveRight" onclick="moveRight()">&#10145;&#65039;</button> 
+		</div>
+		
+   </main>
+    <footer></footer>
+    
+    <script>
+	    function normal() {
+        fetch("/normal")
+        .then(console.log)
+    }
+	
+    function laugh() {
+        fetch("/laugh")
+        .then(console.log)
+    }
+    
+    function upset() {
+        fetch("/upset")
+        .then(console.log)
+    }
+    
+    function surprise() {
+        fetch("/surprise")
+        .then(console.log)
+    }
+	
+	function autoFace() {
+        fetch("/autoFace")
+        .then(console.log)
+    }
+    
+    function shy() {
+        fetch("/shy")
+        .then(console.log)
+    }
+	
+	function neckTop() {
+        fetch("/neckTop")
+        .then(console.log)
+    }
+	function neckBottom() {
+        fetch("/neckBottom")
+        .then(console.log)
+    }
+	function neckLeft() {
+        fetch("/neckLeft")
+        .then(console.log)
+    }
+	function neckRight() {
+        fetch("/neckRight")
+        .then(console.log)
+    }
+	function armLeftTop() {
+        fetch("/armLeftTop")
+        .then(console.log)
+    }
+	function roundRight() {
+        fetch("/roundRight")
+        .then(console.log)
+    }
+	function armLeftBottom() {
+        fetch("/armLeftBottom")
+        .then(console.log)
+    }
+	function armRightTop() {
+        fetch("/armRightTop")
+        .then(console.log)
+    }
+	function roundLeft() {
+        fetch("/roundLeft")
+        .then(console.log)
+    }
+	function armRightBottom() {
+        fetch("/armRightBottom")
+        .then(console.log)
+    }
+	function moveFront() {
+        fetch("/moveFront")
+        .then(console.log)
+    }
+	function moveBack() {
+        fetch("/moveBack")
+        .then(console.log)
+    }
+	function moveRight() {
+        fetch("/moveRight")
+        .then(console.log)
+    }
+	function moveLeft() {
+        fetch("/moveLeft")
+        .then(console.log)
+    }
+	
+	function holdit(btn, action, start) {
+        let t;
+
+        let repeat = () => {
+            action()
+            t = setTimeout(repeat, start)
+        }
+
+        btn.onmousedown = repeat
+
+        btn.onmouseup = () => clearTimeout(t)
+    }
+
+    window.onload = function WindowLoad(event) {
+        
+        holdit(document.getElementById("btn-neckTop"), neckTop, 1000)
+        holdit(document.getElementById("btn-neckBottom"), neckBottom, 1000)
+		holdit(document.getElementById("btn-neckLeft"), neckLeft, 1000)
+        holdit(document.getElementById("btn-neckRight"), neckRight, 1000)
+		
+		holdit(document.getElementById("btn-armLeftTop"), armLeftTop, 1000)
+        holdit(document.getElementById("btn-roundRight"), roundRight, 1000)
+		holdit(document.getElementById("btn-armRightTop"), armRightTop, 1000)
+        holdit(document.getElementById("btn-armLeftBottom"), armLeftBottom, 1000)
+		holdit(document.getElementById("btn-roundLeft"), roundLeft, 1000)
+		holdit(document.getElementById("btn-armRightBottom"), armRightBottom, 1000)
+		
+		holdit(document.getElementById("btn-moveFront"), moveFront, 1000)
+        holdit(document.getElementById("btn-moveLeft"), moveLeft, 1000)
+		holdit(document.getElementById("btn-moveBack"), moveBack, 1000)
+		holdit(document.getElementById("btn-moveRight"), moveRight, 1000)
+  
+    }
+	
+    </script>
+  </body>
+</html>

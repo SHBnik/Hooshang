@@ -1,10 +1,10 @@
 import cv2
 from fer import FER
-# detector = FER(mtcnn=True)
-detector = FER() 
+detector = FER(mtcnn=True)
+# detector = FER() 
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(3,640)
 cap.set(4,480)
 
