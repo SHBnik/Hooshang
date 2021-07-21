@@ -1,0 +1,8 @@
+<launch>
+
+    <node name="server" pkg="hooshang" type="server.py" />
+    <node name="client" pkg="hooshang" type="client.py" />
+    <node name="move" pkg="hooshang" type="move.py" />
+    <node name="face_det" pkg="hooshang" type="facial_expression_detection.py" />
+
+</launch>

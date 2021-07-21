@@ -35,7 +35,7 @@ fastify.get('/autoFace', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'autoFace'
 })
 
@@ -50,7 +50,7 @@ fastify.get('/neckTop', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'neckTop'
 })
 
@@ -60,7 +60,7 @@ fastify.get('/neckBottom', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'neckBottom'
 })
 
@@ -70,7 +70,7 @@ fastify.get('/neckLeft', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'neckLeft'
 })
 
@@ -80,7 +80,7 @@ fastify.get('/neckRight', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'neckRight'
 })
 
@@ -90,7 +90,7 @@ fastify.get('/armLeftTop', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'armLeftTop'
 })
 
@@ -100,7 +100,7 @@ fastify.get('/roundRight', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'roundRight'
 })
 
@@ -110,7 +110,7 @@ fastify.get('/armLeftBottom', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'armLeftBottom'
 })
 
@@ -120,7 +120,7 @@ fastify.get('/armRightTop', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'armRightTop'
 })
 
@@ -130,7 +130,7 @@ fastify.get('/roundLeft', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'roundLeft'
 })
 
@@ -140,7 +140,7 @@ fastify.get('/armRightBottom', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'armRightBottom'
 })
 
@@ -150,7 +150,7 @@ fastify.get('/moveFront', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'moveFront'
 })
 
@@ -160,7 +160,7 @@ fastify.get('/moveBack', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'moveBack'
 })
 
@@ -170,7 +170,7 @@ fastify.get('/moveRight', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'moveRight'
 })
 
@@ -180,7 +180,7 @@ fastify.get('/moveLeft', async (request, reply) => {
 	  clearTimeout(handleTime)
 	  handleTime = 0
   }
-  handleTime = setTimeout(() => { currentMovement = '' }, 1000) 
+  handleTime = setTimeout(() => { currentMovement = '' }, 100) 
   return 'moveLeft'
 })
 
